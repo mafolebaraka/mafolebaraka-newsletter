@@ -8,6 +8,7 @@ import { countReaders, getArchiveNewsletter, listArchiveIssues } from "@/lib/arc
 import { getArchiveUrls } from "@/lib/archive-hosts";
 import { getHomeSeo } from "@/lib/archive-seo";
 import { formatNumber } from "@/lib/format";
+import { FREE_NEWSLETTER_SLUG, getJoinUrl } from "@/lib/membership-tiers";
 
 export const revalidate = 3600;
 
@@ -67,6 +68,14 @@ export default async function ArchivePage({ params }) {
 							<p className="text-sm text-muted-foreground tabular-nums">
 								Join {formatNumber(readers)} readers. Free, unsubscribe anytime.
 							</p>
+						)}
+						{newsletter.slug === FREE_NEWSLETTER_SLUG && (
+							<a
+								href={getJoinUrl()}
+								className="inline-flex h-9 items-center rounded-lg px-4 text-sm font-medium shadow-border transition-shadow duration-150 hover:shadow-border-hover"
+							>
+								Become a paid member
+							</a>
 						)}
 						<LinksSocial links={newsletter.socialLinks} />
 					</div>
